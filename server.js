@@ -6,7 +6,11 @@ const app = express();
 app.set("view engine","ejs")
 
 app.get('/', function(req,res){
-    res.render("landing");
+    let resu = ss.dataLatest();
+    let param = {
+        resu: resu
+    };
+    res.render("landing",param);
 })
 
 app.all('/api/:who/:when/:what/:how', function(req,res){

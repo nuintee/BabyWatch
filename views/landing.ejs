@@ -14,6 +14,7 @@
     </header>
     <main>
         <button class = "actionBtns">ミルク</button>
+        <input id = "milkPortion" type = "number" value = "10" step="10">
         <button class = "actionBtns">オムツ</button>
     </main>
     <footer>
@@ -34,15 +35,50 @@
 
         function check(e){
 
+            let aciton;
+            let milkFlag = false;
+            let ask;
+
+            let now = new Date();
+            let month = now.getMonth() + 1;
+            let date = now.getDate();
+            let hour = now.getHours();
+            let minutes = now.getMinutes();
+
             let personIndex = document.getElementById("form-select").options;
             let who = personIndex[ personIndex.selectedIndex ].innerText;
-            let when = "now";
+            let when = `${month}%2F${date} ${hour}:${minutes}`.toString();
             let what = e.toElement.innerText;
-            let how = "little";
+            let how = document.getElementById("milkPortion").value;
 
-            fetch(`/api/${who}/${what}/${when}/${how}`)
-            .then(response => response.text())
-            .then(data => console.log(data));
+            //Action 選定
+            if (what == 'ミルク'){ 
+                action = "あげ"
+                milkFlag = true;
+            }
+            else { action = "替え" };
+
+            //量が要るか判定
+            if ( milkFlag == true){
+                ask = confirm(`${who}さんが${what}を${month}/${date} ${hour}:${minutes}に${how}ml${action}ました。`)
+            }
+            else {
+                ask = confirm(`${who}さんが${what}を${month}/${date} ${hour}:${minutes}に${action}ました。`)
+            }
+
+            // askの結果によるページネーション
+            if (ask == false) return;
+
+            fetch(`/api/${who}/${when}/${what}/${how}`).then(
+                console.log('Checked to spreadsheet!')
+            );
+
+            //Clear Input
+            document.getElementById("milkPortion").value = 10;
+
+
+            // .then(response => response.text())
+            // .then(data => console.log(data));
         }
     </script>
 </body>

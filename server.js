@@ -9,12 +9,12 @@ app.get('/', function(req,res){
     res.render("landing");
 })
 
-app.all('/api/:who/:what/:when/:how', function(req,res){
+app.all('/api/:who/:when/:what/:how', function(req,res){
     ss.getSheetRequest(
         req.params.who,
-        req.params.what,
         req.params.when,
-        req.params.whow
+        req.params.what,
+        req.params.how
     );
     res.json({
         message:"Hello,world"

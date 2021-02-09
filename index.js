@@ -23,7 +23,7 @@ let cells = 'A1:C3';
 // スプレッドシートAPIはv4を使う
 let sheets = google.sheets('v4');
  
-async function getSheetRequest(who, when, what){
+exports.getSheetRequest = async (who, when, what) => {
  
   // JSON Web Token(JWT) の認証
   let resultJwtClient;
@@ -63,4 +63,4 @@ async function getSheetRequest(who, when, what){
 }
 
 // スプレッドシートを読み込む
-getSheetRequest("I","played","videoGame");
+//getSheetRequest("I","played","videoGame");

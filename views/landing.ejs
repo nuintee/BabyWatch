@@ -17,12 +17,13 @@
         <button class = "actionBtns">オムツ</button>
     </main>
     <footer>
-        <select class="form-select">
+        <select id="form-select">
             <option value="1">Sho</option>
             <option value="2">Non</option>
         </select>
     </footer>
     <script>
+
 
         let actionBtns = document.querySelectorAll('.actionBtns');
 
@@ -31,8 +32,15 @@
             actionBtns[i].addEventListener('click',check,false);
         }
 
-        function check(){
-            fetch('/api')
+        function check(e){
+
+            let personIndex = document.getElementById("form-select").options;
+            let who = personIndex[ personIndex.selectedIndex ].innerText;
+            let when = "now";
+            let what = e.toElement.innerText;
+            let how = "little";
+
+            fetch(`/api/${who}/${what}/${when}/${how}`)
             .then(response => response.text())
             .then(data => console.log(data));
         }

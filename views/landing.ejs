@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BabyWatch</title>
+</head>
+<body>
+    <header>
+        <p><small class="latestPlaceHolder">ミルク : 最終更新</small></p>
+        <h5 id = "milkLatest"></h5>
+        <p><small class = "latestPlaceHolder">オムツ : 最終更新</small></p>
+        <h5 id = "diaperLatest"></h5>
+    </header>
+    <main>
+        <button class = "actionBtns">ミルク</button>
+        <button class = "actionBtns">オムツ</button>
+    </main>
+    <footer>
+        <select class="form-select">
+            <option value="1">Sho</option>
+            <option value="2">Non</option>
+        </select>
+    </footer>
+    <script>
+
+        let actionBtns = document.querySelectorAll('.actionBtns');
+
+        for(let i = 0; i < actionBtns.length; i++)
+        {
+            actionBtns[i].addEventListener('click',check,false);
+        }
+
+        function check(){
+            fetch('/api')
+            .then(response => response.text())
+            .then(data => console.log(data));
+        }
+    </script>
+</body>
+</html>

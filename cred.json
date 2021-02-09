@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "babywatch-304211",
+  "private_key_id": "f4c54796bdee293f6b40bf9dc0161c22359eccbd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDI2zaxw/qjugFs\nXdBq8lswKz+lVJD3hJD/iug2/8qLVJ5O04iI6vCLm6ARQCSAyfSNLmi+GYvqvJJ6\n0LcS2uiY0jNR2oz2UwuuhgsMFEg8tdmohMldQVqvEqIYvyxEE8sItJzxkDle+J8b\nXbBSHLOS9wYRINjR3tQ7SbGpUCwZ3toe2WFuNjlzD7JM9LgJw5efHsYF4Vi0u67Q\nr4FYed6q9sXSn0GSJ7gIFrGqEohP7txPgSR+/iCM+BKwzjvydTnbEeZtwJy9RX5I\nt2Se0BST763O4qFtmbH/g/V/WE6huKX0kpFv0RUiEk5y7qD/NKXPQFG0MVsoPs7x\nynAAF1k/AgMBAAECggEALj1lPIx5FZs7O6bnVc+glZjHSLkMvKbcuK/SYOMHToc3\nAL+rFZY8tW8o7P++x5V2ws/V1jnMX8h00mhdVS5nUNNHdEcjn4ujy1RZk7jRnoRg\n7O5Q6zKh/V8FSTwtpSiHW+Q0o1oIEyiafHLXpjesUZ+j2mqc78fkRRfkmi12Uaf3\nV2wHzXYC4sIxMs63Q5CU53EldPzEGTOr+2URsJNzhaYIl1K3CExFDslbQbLVf+ej\n8tLJs63HCVp0Vqbsc4yYf9F3gLpEMkok9kb/JQ+973hx2Iged4TaMKCBgoPw+kyD\nuh/u2hz+8KdIlCPqNoOy+8ntJNWaEbx3rFAyVAwJSQKBgQDkEXYMuViG8//i0Prp\nneig+trwjpwqXdVLZSzFDmbEVj+1WuxDNx+Ku307W6ZCh8CeUK8MTGAiq1eESgG6\nWZWZuI0DFMVJ7rx16QbrZT2m4vKL79cuOjfxPC6PGtmHH4UE3zLcjFyDbh8/Vy9m\nUN/M4vljD9UiXwaEjZcxplHZaQKBgQDhdJZxNl3W/2vGrZURZYDocHY2bxi1DhHu\nzMbviaz0qTRq5Ay2ckFtqkm68JCLz+Gvuv0DjHHHXKj4DrtrA3080OEv1aoKgap2\nmONcZ384mrZWdohol/PQ1xsqH3rgeyBT+t4bl9dnsDrPuhTB4XcN40b5yzqiy12c\n0NADnOXgZwKBgQCObr076xD3jzDSlVLuTXj3+FJ9g4LSDrHjmTchhgH2QisddsAw\nph9jw/3M8UrfJ+rKtHbuBlDPthQ9AP8dQ09jplcignlH1/oI5VQ19I9RR1DUxh+r\nth4z4TLumoUZlzy6sy4PgPVR+5c2NpvamU17ppC7JiskgRYP+GFhV46saQKBgEOV\nrZuWjp7qxqYyVuN2KCSFwgojV6a+5wVNAb3A6cYWCw6X+m+e5Jo5WAzgHJSs5pzF\nUx+DNIBs+IIT+H7l9t8KRtcOGAE6SZ1vy4hhxjNzvYFB2zZvhrluIkiIU0+D2XcT\nVw2ygPImVBr9T0enjQbuwNIU6CjxCcj+l7zdhdO1AoGBAMSo/U+XYde2HyekBy/K\nb8ErR5xi8l6lM9STwgKX2cCAmHisXfF9JthKci9cWODk5iczNCeqh6ozVlkJRvJu\nzcuwA5yA0ocXSE33XlvL7plk+HZnGum0ef80llvCU3U2S3yZB90KGhnKWHaf3ns5\nWDMKhDJsLnl2OUtDRQyZk0Ld\n-----END PRIVATE KEY-----\n",
+  "client_email": "babywatcher@babywatch-304211.iam.gserviceaccount.com",
+  "client_id": "110982083286642015939",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/babywatcher%40babywatch-304211.iam.gserviceaccount.com"
+}

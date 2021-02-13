@@ -3,6 +3,7 @@ const mongodb = require('mongodb')
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000
+const moment = require('moment');
 
 const MongoClient = mongodb.MongoClient
 const url = 'mongodb+srv://nuintee:0117@clusterbabywatcher.lgsjj.mongodb.net'
@@ -24,12 +25,13 @@ app.all('/', function(req,res){
 
 app.post('/api',function(req,res){
     //Date
-    let now = new Date();
-    let month = now.getMonth() + 1;
-    let date = now.getDate();
-    let hour = now.getHours();
-    let minutes = now.getMinutes();
+    let month = moment().month();
+    let date = moment().date();
+    let hour = moment().hour();
+    let minutes = moment().minute();
     let time = `${month} / ${date} ${hour}:${minutes}`
+
+    console.log(moment().utc(), moment())
 
     //console.log(req)
     const who = req.body.who;

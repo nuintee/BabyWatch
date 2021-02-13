@@ -1,9 +1,8 @@
 const express = require('express');
 const mongodb = require('mongodb')
-//const ss = require('./index.js')
-//const mdb = require('./db.js')
 const app = express();
 const bodyParser = require('body-parser');
+const PORT = process.env.PORT || 3000
 
 const MongoClient = mongodb.MongoClient
 const url = 'mongodb+srv://nuintee:0117@clusterbabywatcher.lgsjj.mongodb.net'
@@ -55,7 +54,7 @@ client.connect(function(err){
     }
     else{
         console.log('connected to mongodb')
-        app.listen(3000, () => console.log('Listening On 3000'))
+        app.listen(PORT, () => console.log(`Listening On ${ PORT }`))
     }
 })
 

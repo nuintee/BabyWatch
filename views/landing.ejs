@@ -37,8 +37,8 @@
             </tbody>
         </table>
     </div>
-    <header>
-        <button onclick="drawer()">データ</button>
+    <button onclick="drawer()">データ</button>
+    <header class = "d-flex align-items-center flex-column">
         <p class="latestPlaceHolder">ミルク : 最終更新</p>
         <h6 id = "milkLatest">
             <% if (data.find((v) => v.what == 'ミルク')) { %>
@@ -69,7 +69,7 @@
         </h6>
     </header>
     <main>
-        <form action = "/api" method = "POST" onsubmit="return check(this)">
+        <form action = "/api" method = "POST"  onsubmit="return check(this)">
             <div class = "input-group mb-3">
                 <input type = "submit" class = "btn btn-primary actionBtns" name = "what" value = "ミルク" >
                 <input id = "milkPortion" type = "number" value = "10" step="5" name = "portion">

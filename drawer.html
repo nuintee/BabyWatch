@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class = "drawer">
+        <button onclick="drawer()">=</button>
+    </div>
+
+    <div class = "main">
+        <button onclick="drawer()">=</button>
+        <h2>This is main page</h2>
+    </div>
+    <script>
+        function drawer(){
+            let drawerTarget = document.getElementsByClassName('drawer')[0];
+
+            drawerTarget.classList.toggle('on')
+        }
+    </script>
+    <style>
+
+        .main {
+            z-index: 1;
+        }
+
+        .drawer {
+            position: absolute;
+            top:0;
+            left:0;
+            background-color: rgba(0, 0, 0, 0.5);
+            transform: translateX(-100%);
+            transition-duration: 1s;
+            height:100%;
+            width:100%;
+            margin:0;
+            z-index: 100;
+        }
+
+        .drawer.on{
+            transition-duration: 0.5s;
+            transform: translateX(0);
+        }
+    </style>
+</body>
+</html>

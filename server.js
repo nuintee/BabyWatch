@@ -19,7 +19,7 @@ app.all('/', function(req,res){
     const db = client.db(dbName)
     const collection = db.collection('Time');
     collection.find({}).toArray(function(err, doc){
-        res.render("landing",{data : doc})
+        res.render("index",{data : doc})
     })
 })
 
@@ -27,18 +27,17 @@ app.post('/api',function(req,res){
     //Date
     let dateTime = moment();
     dateTime.tz('Asia/Tokyo')
-    dateTime.add(1,'month');
 
     let month = dateTime.month();
     let date = dateTime.date();
     let hour = dateTime.hours();
     let minutes = dateTime.minutes();
-    let time = `${month} / ${date} ${hour}:${minutes}`
+    //let time = `${month}/${date} ${hour}:${minutes}`
 
 
     const who = req.body.who;
     const what = req.body.what;
-    const when = time;
+    const when = dateTime.toISOString();
     const portion = req.body.portion;
     const db = client.db(dbName)
     const collection = db.collection('Time');

@@ -3,7 +3,7 @@ const mongodb = require('mongodb')
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000
-const moment = require('moment');
+const moment = require('moment-timezone');
 
 const MongoClient = mongodb.MongoClient
 const url = 'mongodb+srv://nuintee:0117@clusterbabywatcher.lgsjj.mongodb.net'
@@ -25,11 +25,9 @@ app.all('/', function(req,res){
 
 app.post('/api',function(req,res){
     //Date
-    let dateTime = moment().utc();
-    //UTC -> JST 時差
-    const JSTDiff = 9;
-    dateTime.add(JSTDiff, "hours")
-
+    let dateTime = moment();
+    dateTime.tz('Asia/Tokyo')
+    dateTime.add(1,'month');
 
     let month = dateTime.month();
     let date = dateTime.date();

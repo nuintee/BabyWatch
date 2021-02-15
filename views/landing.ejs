@@ -48,7 +48,14 @@
                         <% milkIndex = i %>
                     <% } %>
                 <% } %>
-                <%= `${data[milkIndex].when} - ${data[milkIndex].who} (${data[milkIndex].portion}ml) 🍼` %>
+                <% let now = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }) %>
+                <%# let hourOffset = now.getMonth() + 1 %>
+                <%# now.setHours(hourOffset) %>
+                <%# let dateTime = new Date(`${data[milkIndex].when}`) %>
+                <%# let minDiff = (now - dateTime) / 360000 %>
+                <%# let dayDiff = minDiff / 24 %>
+                <%= now %>
+                <%#= `${data[milkIndex].when} - ${data[milkIndex].who} (${data[milkIndex].portion}ml) 🍼` %>
             <% } else { %>
                 まだデータがありません
             <% } %>

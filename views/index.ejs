@@ -46,8 +46,12 @@
     <hr class="m-0">
     <form action = "/api" method = "POST"  onsubmit="return check(this)" class = "d-flex align-items-center justify-content-between flex-column h-100 p-3">
         <input type = "submit" class = "btn btn-primary actionBtns" name = "what" value = "ミルク" >
+        <% let milkIndex = data.reverse().find((item) => item.what == 'ミルク') %>
+        <h6 class = "latestDisplay" id = "latestMilk"><%= milkIndex.when %></h6>
         <input id = "milkPortion" type = "number" min = "0" value = "10" step="5" name = "portion">
         <input type= "submit" class = "btn btn-secondary actionBtns" name = "what" value="オムツ">
+        <% let diaperIndex = data.reverse().find((item) => item.what == 'オムツ') %>
+        <h6 class = "latestDisplay" id = "latestDiaper"><%= diaperIndex.when %></h6>
         <div>
             <select class="custom-select" id="form-select" name = "who">
                 <option value="Sho" name = "Sho">Sho</option>
@@ -58,11 +62,13 @@
 
     
     <script>
-
-        let actionBtns = document.getElementsByClassName('actionBtns');
+        let time;
+        const actionBtns = document.getElementsByClassName('actionBtns');
+        const latestDisp = document.getElementsByClassName('latestDisplay');
         let pressedBtn;
         let whoisTarget
 
+        // 前回の担当者をデフォルト選択　-->
         if (!localStorage.getItem('whois')){
             console.log('Empty Storage')
         } else {
@@ -71,11 +77,30 @@
 
         let whoTarget = document.getElementById('form-select')
         whoTarget[whoisTarget].selected = true
+        // <--
 
+        // 選択切り替え時に担当者設定　-->
         whoTarget.addEventListener('change',function(){
             let whoWas = whoTarget.selectedIndex
             localStorage.setItem("whois",whoWas)
         },false);
+        // <--
+
+        //Time Update -->
+        let timeUpdate = () => {
+            time = new Date()
+            for (let i = 0; i < latestDisp.length; i++){
+                //time = latestDisp[i].innerText
+                // console.log(`Time = ${time}`)
+                // console.log(`Texts = ${latestDisp[i].innerText}`)
+                let oldDate = new Date(latestDisp[i].innerText)
+                console.log(typeof new Date(latestDisp[i].innerText));
+                //console.log((time - oldDate) / 360000)
+
+            }
+        }
+        setInterval(timeUpdate,1000)
+        // <--
 
 
         for (let i = 0; i < actionBtns.length; i++){

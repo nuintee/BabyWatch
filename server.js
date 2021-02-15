@@ -25,14 +25,15 @@ app.all('/', function(req,res){
 
 app.post('/api',function(req,res){
     //Date
-    let dateTime = new Date();
-    // +9 hours to make it utc
-    dateTime.setTime(dateTime.getTime() + 1000 * 60 * 60 * 9)
-    let month = dateTime.getMonth();
-    let date = dateTime.getDate();
-    let hour = dateTime.getHours();
-    let minutes = dateTime.getMinutes();
-    let time = `${month} / ${date} ${hour}:${minutes}`
+    let time = moment().utc();
+    // let dateTime = new Date();
+    // // +9 hours to make it utc
+    // dateTime.setTime(dateTime.getTime() + 1000 * 60 * 60 * 9)
+    // let month = dateTime.getMonth();
+    // let date = dateTime.getDate();
+    // let hour = dateTime.getHours();
+    // let minutes = dateTime.getMinutes();
+    // let time = `${month} / ${date} ${hour}:${minutes}`
 
     //console.log(moment().utc(), moment())
 

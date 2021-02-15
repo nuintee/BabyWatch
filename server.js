@@ -3,6 +3,9 @@ const mongodb = require('mongodb')
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000
+
+process.env.TZ = 'Asia/Tokyo';
+
 const moment = require('moment-timezone');
 
 const MongoClient = mongodb.MongoClient

@@ -44,6 +44,8 @@
         <button onclick="drawer()" class="btn btn-dark">データ</button>
     </header>
     <hr class="m-0">
+    <% var offset = new Date().getTimezoneOffset(); %>
+    <%= offset %>
     <form action = "/api" method = "POST"  onsubmit="return check(this)" class = "d-flex align-items-center justify-content-between flex-column h-100 p-3">
         <input type = "submit" class = "btn btn-primary actionBtns" name = "what" value = "ミルク" >
         <input id = "milkPortion" type = "number" min = "0" value = "10" step="5" name = "portion">
@@ -61,6 +63,17 @@
 
         let actionBtns = document.getElementsByClassName('actionBtns');
         let pressedBtn;
+        let whoisTarget
+
+        if (!localStorage.getItem('whois')){
+            console.log('Empty Storage')
+        } else {
+            whoisTarget = Number(localStorage.getItem('whois'))
+        }
+
+        let whoTarget = document.getElementById('form-select')
+        whoTarget[whoisTarget].selected = true
+
 
         for (let i = 0; i < actionBtns.length; i++){
             actionBtns[i].addEventListener('click',function(e){
@@ -78,7 +91,6 @@
 
         function check(e){
 
-            let whoTarget = document.getElementById('form-select')
             let whoIndex = whoTarget.selectedIndex
             let who = whoTarget[whoIndex].value
 
@@ -98,6 +110,7 @@
                 return false
             }
             else {
+                localStorage.setItem("whois",whoIndex)
                 return true
             }
         }

@@ -74,6 +74,11 @@
         let whoTarget = document.getElementById('form-select')
         whoTarget[whoisTarget].selected = true
 
+        whoTarget.addEventListener('change',function(){
+            let whoWas = whoTarget.selectedIndex
+            localStorage.setItem("whois",whoWas)
+        },false);
+
 
         for (let i = 0; i < actionBtns.length; i++){
             actionBtns[i].addEventListener('click',function(e){
@@ -110,7 +115,6 @@
                 return false
             }
             else {
-                localStorage.setItem("whois",whoIndex)
                 return true
             }
         }

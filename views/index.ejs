@@ -41,11 +41,9 @@
         </table>
     </div>
     <header class="p-3 m-0">
-        <button onclick="drawer()" class="btn btn-dark">データ</button>
+        <button onclick="drawer()" class="btn btn-dark"> データ </button>
     </header>
     <hr class="m-0">
-    <% var offset = new Date().getTimezoneOffset(); %>
-    <%= offset %>
     <form action = "/api" method = "POST"  onsubmit="return check(this)" class = "d-flex align-items-center justify-content-between flex-column h-100 p-3">
         <input type = "submit" class = "btn btn-primary actionBtns" name = "what" value = "ミルク" >
         <input id = "milkPortion" type = "number" min = "0" value = "10" step="5" name = "portion">

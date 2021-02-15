@@ -30,6 +30,8 @@ app.post('/api',function(req,res){
     //Date
     let dateTime = moment();
     dateTime.tz('Asia/Tokyo')
+    //時差分足す
+    dateTime.add(9,"hours")
 
     let month = dateTime.month();
     let date = dateTime.date();

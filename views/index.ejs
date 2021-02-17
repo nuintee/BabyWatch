@@ -104,11 +104,8 @@
         //socket io
         let socket = io()
 
-        socket.emit('db',"find")
-
-        socket.on('dbres', msg =>{
-            console.log(msg)
-            //Working!
+        socket.on('reload page', msg =>{
+            location.reload();
         })
         
 

@@ -66,13 +66,6 @@ io.on('connection',(socket) => {
     socket.on('updated',(msg) => {
         io.emit('reload page',msg)
     })
-    socket.on('db',(msg) => {
-        const db = client.db(dbName)
-        const collection = db.collection('Time');
-        collection.find({}).toArray(function(err, doc){
-            io.emit('dbres',doc)
-        })
-    })
 })
 
 client.connect(function(err){

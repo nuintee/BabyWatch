@@ -113,16 +113,15 @@
                 console.log('Empty Storage')
             } else {
                 whoisTarget = Number(localStorage.getItem('whois'))
-            }
-            let whoTarget = document.getElementById('form-select')
-            whoTarget[whoisTarget].selected = true
-
-             // 選択切り替え時に担当者設定　-->
-            whoTarget.addEventListener('change',function(){
-                let whoWas = whoTarget.selectedIndex
-                localStorage.setItem("whois",whoWas)
-            },false);
+                let whoTarget = document.getElementById('form-select')
+                whoTarget[whoisTarget].selected = true
+                 // 選択切り替え時に担当者設定　-->
+                whoTarget.addEventListener('change',function(){
+                    let whoWas = whoTarget.selectedIndex
+                    localStorage.setItem("whois",whoWas)
+                },false);
             // <--
+            }
         }
         else {
             console.log('localStorage unavailable!')
@@ -171,7 +170,6 @@
             else if (pressedBtn == 'オムツ'){
                 question = `${who}さんが${pressedBtn}を交換しました`;
             }
-            console.log(who + "さんが")
             let answer = confirm(question);
 
             if (answer == false){ 

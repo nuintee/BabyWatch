@@ -8,10 +8,10 @@
     <link href="manifest.json" crossorigin= "use-credentials" rel="manifest" >
     <script async src="https://cdn.jsdelivr.net/npm/pwacompat" crossorigin="anonymous"></script>
 </head>
-<body  class = "v-100">
+<body class = "h-100">
     <div class = "drawer">
         <header class="p-3">
-            <button onclick="drawer()" class="btn btn-dark">ホーム</button>
+            <button onclick="drawer()" class="btn btn-outline-dark">ホーム</button>
         </header>
         <hr class="m-0">
         <table class = "table table-striped">
@@ -43,31 +43,45 @@
         </table>
     </div>
     <header class="p-3 m-0">
-        <button onclick="drawer()" class="btn btn-dark"> データ </button>
+        <button onclick="drawer()" class="btn btn-outline-dark"> データ </button>
+        <button onclick="location.reload()" class="btn btn-outline-dark"> 更新 </button>
     </header>
     <hr class="m-0">
-    <form action = "/api" method = "POST"  onsubmit="return check(this)" class = "d-flex align-items-center justify-content-between flex-column h-100 p-3">
-        <input type = "submit" class = "btn btn-primary actionBtns" name = "what" value = "ミルク" >
-        <% let milkIndex = data.reverse().find((item) => item.what == 'ミルク') %>
-        <% if (milkIndex) { %>
-            <!-- Dummy Value Holder -->
-            <div style="display: none;" class="latestTarget"><%= milkIndex.when %></div>
-            <h6 class = "latestDisplay" id = "latestMilk">-分前</h6>
-        <% } else { %>
-            <%= "まだデータがありません" %>
-        <% } %>
-        <input id = "milkPortion" type = "number" min = "0" value = "20" step="5" name = "portion">
-        <input type= "submit" class = "btn btn-secondary actionBtns" name = "what" value= "オムツ">
-        <% let diaperIndex = data.find((item) => item.what == 'オムツ') %>
-        <% if (diaperIndex) { %>
-            <!-- Dummy Value Holder -->
-            <div style="display: none;" class="latestTarget"><%= diaperIndex.when %></div>
-            <h6 class = "latestDisplay" id = "latestDiaper">-分前</h6>
-        <% } else { %>
-        <%= "まだデータがありません"　 %>
-        <% } %>
+    <form action = "/api" method = "POST"  onsubmit="return check(this)" class = "d-flex flex-column flex-nowrap justify-content-around h-100 p-3">
+        <div class="input-group mb-2 justify-content-center">
+            <span class="input-group-text">量</span>
+            <input id = "milkPortion" type = "number" min = "0" value = "20" step="5" name = "portion">
+            <span class="input-group-text">ml</span>
+        </div>
+        <div class= "input-group mb-3 justify-content-center">
+            <input type = "submit" class = "btn btn-primary btn-lg actionBtns" name = "what" value = "ミルク" >
+            <span class="input-group-text" id="basic-addon3">
+                <% let milkIndex = data.reverse().find((item) => item.what == 'ミルク') %>
+                <% if (milkIndex) { %>
+                    <!-- Dummy Value Holder -->
+                    <div style="display: none;" class="latestTarget"><%= milkIndex.when %></div>
+                    <h6 class = "latestDisplay mb-0" id = "latestMilk">-分前</h6>
+                <% } else { %>
+                    <%= "まだデータがありません" %>
+                <% } %>
+            </span>
+        </div>
+        <div class = "input-group mb-3  justify-content-center">
+            <input type= "submit" class = "btn btn-secondary btn-lg actionBtns" name = "what" value= "オムツ">
+            <span class="input-group-text" id="basic-addon2">
+                <% let diaperIndex = data.find((item) => item.what == 'オムツ') %>
+                <% if (diaperIndex) { %>
+                <!-- Dummy Value Holder -->
+                <div style="display: none;" class="latestTarget"><%= diaperIndex.when %></div>
+                <h6 class = "latestDisplay mb-0" id = "latestDiaper">-分前</h6>
+                <% } else { %>
+                <%= "まだデータがありません"　 %>
+                <% } %>
+            </span>
+        </div>
+        
         <div>
-            <select class="custom-select" id="form-select" name = "who">
+            <select class="form-select form-select-lg" id="form-select" name = "who">
                 <option value="Sho" name = "Sho">Sho</option>
                 <option value="Non" name = "Non">Non</option>
             </select>

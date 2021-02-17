@@ -63,8 +63,8 @@ app.post('/api',function(req,res){
 
 io.on('connection',(socket) => {
     console.log('connected to io')
-    socket.on('updated db',(msg) => {
-        socket.emit ('reload page')
+    socket.on('alerting',(msg) => {
+        socket.emit('reload page')
     })
 })
 

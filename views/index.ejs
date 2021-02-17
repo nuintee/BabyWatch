@@ -73,6 +73,7 @@
             </select>
         </div>
     </form>
+    <button onclick="emi()">Emit</button>
     <style>
 
         .drawer {
@@ -97,9 +98,14 @@
         //socket io
         let socket = io()
 
-        socket.on('reload page',(msg)=>{
-            console.log('he')
+        function emi(){
+            socket.emit('alerting',{value : "data"})
+        }
+
+        socket.on('reload page',(msg) => {
+            alert('hey')
         })
+        
 
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').then(async (registration) => {

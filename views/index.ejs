@@ -63,9 +63,34 @@
             </select>
         </div>
     </form>
+    <style>
 
-    
+        .drawer {
+            position: absolute;
+            top:0;
+            left:-100%;
+            background-color: #FFF;
+            transition-duration: 0.5s;
+            height:100%;
+            width:100%;
+            margin:0;
+            z-index: 100;
+        }
+
+        .drawer.on{
+            transition-duration: 0.5s;
+            left:0%;
+        }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
     <script>
+        //socket io
+        let socket = io()
+
+        socket.on('reload page',(msg)=>{
+            window.location.href = "/"
+        })
+
         let time;
         const actionBtns = document.getElementsByClassName('actionBtns');
         const latestTarget = document.getElementsByClassName('latestTarget');
@@ -140,29 +165,11 @@
                 return false
             }
             else {
+                socket.emit('updated db', answer);
                 return true
             }
         }
 
     </script>
-    <style>
-
-        .drawer {
-            position: absolute;
-            top:0;
-            left:-100%;
-            background-color: #FFF;
-            transition-duration: 0.5s;
-            height:100%;
-            width:100%;
-            margin:0;
-            z-index: 100;
-        }
-
-        .drawer.on{
-            transition-duration: 0.5s;
-            left:0%;
-        }
-    </style>
 </body>
 </html>

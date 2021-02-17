@@ -1,6 +1,8 @@
 const express = require('express');
 const mongodb = require('mongodb')
 const app = express();
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000
 
@@ -25,6 +27,7 @@ app.all('/', function(req,res){
         res.render("index",{data : doc})
     })
 })
+
 
 app.post('/api',function(req,res){
     //Date
@@ -56,15 +59,19 @@ app.post('/api',function(req,res){
     });
 })
 
+io.on('connection',(socket) => {
+    console.log('connected to io')
+    socket.on('updated db',(msg) => {
+        socket.emit ('reload page')
+    })
+})
+
 client.connect(function(err){
     if (err){
         console.log(err);
     }
     else{
         console.log('connected to mongodb')
-        app.listen(PORT, () => console.log(`Listening On ${ PORT }`))
+        server.listen(PORT, () => console.log(`Listening On ${ PORT }`))
     }
 })
-
-
-

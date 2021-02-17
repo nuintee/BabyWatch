@@ -1,4 +1,5 @@
 const express = require('express');
+const exec = require('child_process').exec;
 const mongodb = require('mongodb')
 const app = express();
 const server = require('http').Server(app)
@@ -16,6 +17,7 @@ const dbName = 'BabyChecks'
 
 const client = new MongoClient(url)
 
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set("view engine","ejs")

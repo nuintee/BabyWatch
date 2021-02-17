@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BabyWatch</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="manifest.json" crossorigin= "use-credentials" rel="manifest" >
+    <script async src="https://cdn.jsdelivr.net/npm/pwacompat" crossorigin="anonymous"></script>
 </head>
 <body  class = "v-100">
     <div class = "drawer">
@@ -98,6 +100,14 @@
         socket.on('reload page',(msg)=>{
             console.log('he')
         })
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then(async (registration) => {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }).catch((err) => {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        }
 
         let time;
         const actionBtns = document.getElementsByClassName('actionBtns');

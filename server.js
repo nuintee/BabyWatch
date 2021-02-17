@@ -63,8 +63,15 @@ app.post('/api',function(req,res){
 
 io.on('connection',(socket) => {
     console.log('connected to io')
-    socket.on('alerting',(msg) => {
-        socket.emit('reload page')
+    socket.on('updated',(msg) => {
+        io.emit('reload page',msg)
+    })
+    socket.on('db',(msg) => {
+        const db = client.db(dbName)
+        const collection = db.collection('Time');
+        collection.find({}).toArray(function(err, doc){
+            io.emit('dbres',doc)
+        })
     })
 })
 

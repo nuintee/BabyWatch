@@ -73,7 +73,6 @@
             </select>
         </div>
     </form>
-    <button onclick="emi()">Emit</button>
     <style>
 
         .drawer {
@@ -95,15 +94,20 @@
     </style>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+        let time;
+        const actionBtns = document.getElementsByClassName('actionBtns');
+        const latestTarget = document.getElementsByClassName('latestTarget');
+        const latestDisp = document.getElementsByClassName('latestDisplay');
+        let pressedBtn;
+        let whoisTarget
+
         //socket io
         let socket = io()
 
-        function emi(){
-            socket.emit('alerting',{value : "data"})
-        }
+        socket.emit('db',"find")
 
-        socket.on('reload page',(msg) => {
-            alert('hey')
+        socket.on('dbres', msg =>{
+            console.log(msg)
         })
         
 
@@ -114,14 +118,6 @@
                 console.log('ServiceWorker registration failed: ', err);
             });
         }
-
-        let time;
-        const actionBtns = document.getElementsByClassName('actionBtns');
-        const latestTarget = document.getElementsByClassName('latestTarget');
-        const latestDisp = document.getElementsByClassName('latestDisplay');
-        let pressedBtn;
-        let whoisTarget
-
 
         // 前回の担当者をデフォルト選択　-->
         if (localStorage){
@@ -192,7 +188,7 @@
                 return false
             }
             else {
-                //socket.emit('updated db', answer);
+                socket.emit('updated',{value : "true"})
                 return true
             }
         }

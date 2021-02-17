@@ -47,15 +47,23 @@
     <form action = "/api" method = "POST"  onsubmit="return check(this)" class = "d-flex align-items-center justify-content-between flex-column h-100 p-3">
         <input type = "submit" class = "btn btn-primary actionBtns" name = "what" value = "ミルク" >
         <% let milkIndex = data.reverse().find((item) => item.what == 'ミルク') %>
-        <!-- Dummy Value Holder -->
+        <% if (milkIndex) { %>
+            <!-- Dummy Value Holder -->
             <div style="display: none;" class="latestTarget"><%= milkIndex.when %></div>
-        <h6 class = "latestDisplay" id = "latestMilk">-分前</h6>
-        <input id = "milkPortion" type = "number" min = "0" value = "10" step="5" name = "portion">
+            <h6 class = "latestDisplay" id = "latestMilk">-分前</h6>
+        <% } else { %>
+            <%= "まだデータがありません" %>
+        <% } %>
+        <input id = "milkPortion" type = "number" min = "0" value = "20" step="5" name = "portion">
         <input type= "submit" class = "btn btn-secondary actionBtns" name = "what" value= "オムツ">
         <% let diaperIndex = data.find((item) => item.what == 'オムツ') %>
-        <!-- Dummy Value Holder -->
+        <% if (diaperIndex) { %>
+            <!-- Dummy Value Holder -->
             <div style="display: none;" class="latestTarget"><%= diaperIndex.when %></div>
-        <h6 class = "latestDisplay" id = "latestDiaper">-分前</h6>
+            <h6 class = "latestDisplay" id = "latestDiaper">-分前</h6>
+        <% } else { %>
+        <%= "まだデータがありません"　 %>
+        <% } %>
         <div>
             <select class="custom-select" id="form-select" name = "who">
                 <option value="Sho" name = "Sho">Sho</option>
@@ -88,7 +96,7 @@
         let socket = io()
 
         socket.on('reload page',(msg)=>{
-            window.location.href = "/"
+            console.log('he')
         })
 
         let time;
@@ -98,23 +106,27 @@
         let pressedBtn;
         let whoisTarget
 
+
         // 前回の担当者をデフォルト選択　-->
-        if (!localStorage.getItem('whois')){
-            console.log('Empty Storage')
-        } else {
-            whoisTarget = Number(localStorage.getItem('whois'))
+        if (localStorage){
+            if (!localStorage.getItem('whois')){
+                console.log('Empty Storage')
+            } else {
+                whoisTarget = Number(localStorage.getItem('whois'))
+            }
+            let whoTarget = document.getElementById('form-select')
+            whoTarget[whoisTarget].selected = true
+
+             // 選択切り替え時に担当者設定　-->
+            whoTarget.addEventListener('change',function(){
+                let whoWas = whoTarget.selectedIndex
+                localStorage.setItem("whois",whoWas)
+            },false);
+            // <--
         }
-
-        let whoTarget = document.getElementById('form-select')
-        whoTarget[whoisTarget].selected = true
-        // <--
-
-        // 選択切り替え時に担当者設定　-->
-        whoTarget.addEventListener('change',function(){
-            let whoWas = whoTarget.selectedIndex
-            localStorage.setItem("whois",whoWas)
-        },false);
-        // <--
+        else {
+            console.log('localStorage unavailable!')
+        }
 
         //Time Update -->
         let timeUpdate = () => {
@@ -146,6 +158,7 @@
 
         function check(e){
 
+            let whoTarget = document.getElementById('form-select')
             let whoIndex = whoTarget.selectedIndex
             let who = whoTarget[whoIndex].value
 
@@ -158,14 +171,14 @@
             else if (pressedBtn == 'オムツ'){
                 question = `${who}さんが${pressedBtn}を交換しました`;
             }
-
+            console.log(who + "さんが")
             let answer = confirm(question);
 
             if (answer == false){ 
                 return false
             }
             else {
-                socket.emit('updated db', answer);
+                //socket.emit('updated db', answer);
                 return true
             }
         }

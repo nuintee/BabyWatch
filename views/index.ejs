@@ -104,8 +104,12 @@
         //socket io
         let socket = io()
 
+        function emu(){
+            location.reload()
+        }
+
         socket.on('reload page', msg =>{
-            location.reload();
+            setTimeout(emu,1000)
         })
         
 

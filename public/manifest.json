@@ -2,7 +2,7 @@
     "name": "BabyTrack",
     "short_name": "BabyTrack",
     "display": "standalone",
-    "start_url": "index.ejs",
+    "start_url": "https://baby-watcher.herokuapp.com/",
     "icons": [
         {
             "src": "files/192x192.png",

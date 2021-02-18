@@ -27,10 +27,17 @@
             <tbody>
                 <%# 最新のものから表示 %>
                 <%for (let i = data.length - 1; i >= 0; i--)  {%>
+                <%# Formatting Time %>
+                <% let formated = data[i].when.match(/((?<=-)\d.|(?<=[a-zA-Z])\d.|(?<=:)\d.{1})/gi) %>
+                <% let month = formated[0] %>
+                <% let date = formated[1] %>
+                <% let hour = formated[2] %>
+                <% let minutes = formated[3] %>
+                <% const time = `${month}/${date} ${hour}:${minutes}` %>
                 <tr>
                     <th scope="row"><%= i + 1 %></th>
                     <td><%= data[i].who%></td>
-                    <td><%= data[i].when%></td>
+                    <td><%= time %></td>
                     <td><%= data[i].what%></td>
                     <td>
                         <% if (data[i].what == 'ミルク') { %>
@@ -43,6 +50,7 @@
         </table>
     </div>
     <header class="p-3 m-0">
+        <h6>Dev</h6>
         <button onclick="drawer()" class="btn btn-outline-dark"> データ </button>
         <button onclick="location.reload()" class="btn btn-outline-dark"> 更新 </button>
     </header>
@@ -162,7 +170,13 @@
                 let oldDate = new Date(latestTarget[i].innerText)
                 let oldHour = oldDate.getHours();
                 oldDate.setHours(oldHour - 9)
-                latestDisp[i].innerText = `${Math.round((time - oldDate) / 60000)}分前`
+                let dateDiff = Math.round((time - oldDate) / 60000)
+                if (dateDiff >= 60){
+                    dateDiff /= 60;
+                    latestDisp[i].innerText = `約${Math.round(dateDiff * 10) / 10}時間前`
+                } else {
+                    latestDisp[i].innerText = `${dateDiff}分前`
+                }
             }
         }
         setInterval(timeUpdate,1000)

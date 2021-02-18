@@ -12,22 +12,38 @@ process.env.TZ = 'Asia/Tokyo';
 const moment = require('moment-timezone');
 
 const MongoClient = mongodb.MongoClient
-const url = 'mongodb+srv://nuintee:0117@clusterbabywatcher.lgsjj.mongodb.net'
-const dbName = 'BabyChecks'
+//const url = 'mongodb+srv://nuintee:0117@clusterbabywatcher.lgsjj.mongodb.net'
+const url = 'mongodb://127.0.0.1:27017/'
+//const dbName = 'BabyChecks'
+const dbName = 'dev'
 
-const client = new MongoClient(url)
+const client = new MongoClient(url,{ useNewUrlParser: true })
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set("view engine","ejs")
 
+// app.all('/', function(req,res){
+//     const db = client.db(dbName)
+//     const collection = db.collection('Time');
+//     collection.find({}).toArray(function(err, doc){
+//         res.render("index",{data : doc})
+//     })
+// })
+
 app.all('/', function(req,res){
-    const db = client.db(dbName)
-    const collection = db.collection('Time');
-    collection.find({}).toArray(function(err, doc){
-        res.render("index",{data : doc})
-    })
+        const db = client.db(dbName)
+        const collection = db.collection('devTime');
+        collection.find({}).toArray(function(err, doc){
+            if (err){
+                console.log('failed! with' + err)
+                return
+            }
+            else{
+                res.render("index",{data : doc})
+            }
+        })
 })
 
 
@@ -50,7 +66,7 @@ app.post('/api',function(req,res){
     const when = dateTime.toISOString();
     const portion = req.body.portion;
     const db = client.db(dbName)
-    const collection = db.collection('Time');
+    const collection = db.collection('devTime');
     collection.insertOne({
         who,
         when,

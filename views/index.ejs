@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BabyWatch</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
     <link href="manifest.json" crossorigin= "use-credentials" rel="manifest" >
     <script async src="https://cdn.jsdelivr.net/npm/pwacompat" crossorigin="anonymous"></script>
 </head>
-<body class = "h-100">
+<body>
     <div class = "drawer">
-        <header class="p-3">
+        <header>
             <button onclick="drawer()" class="btn btn-outline-dark">ホーム</button>
         </header>
-        <hr class="m-0">
-        <table class = "table table-striped">
+        <hr>
+        <table>
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -49,50 +49,53 @@
             </tbody>
         </table>
     </div>
-    <header class="p-3 m-0">
-        <h6>Dev</h6>
-        <button onclick="drawer()" class="btn btn-outline-dark"> データ </button>
-        <button onclick="location.reload()" class="btn btn-outline-dark"> 更新 </button>
+    <header class = "header">
+        <div class = "top-header">
+            <button onclick="drawer()" class="nav-btn"> データ </button>
+            <h4>ホーム</h4>
+            <div>
+                <select id="form-select" name = "who">
+                    <option value="Sho" name = "Sho">Sho</option>
+                    <option value="Non" name = "Non">Non</option>
+                </select>
+            </div>
+            <!-- <button onclick="location.reload()" class="nav-btn"> 更新 </button> -->
+        </div>
     </header>
-    <hr class="m-0">
-    <form action = "/api" method = "POST"  onsubmit="return check(this)" class = "d-flex flex-column flex-nowrap justify-content-around h-100 p-3">
-        <div class="input-group mb-2 justify-content-center">
-            <span class="input-group-text">量</span>
-            <input id = "milkPortion" type = "number" min = "0" value = "20" step="5" name = "portion">
-            <span class="input-group-text">ml</span>
-        </div>
-        <div class= "input-group mb-3 justify-content-center">
-            <input type = "submit" class = "btn btn-primary btn-lg actionBtns" name = "what" value = "ミルク" >
-            <span class="input-group-text" id="basic-addon3">
+    <form action = "/api" method = "POST"  id = "main-form"  onsubmit="return check(this)">
+        <div class ="cards">
+            <div class = "top-cards">
+                <h4>ミルク</h4>
                 <% let milkIndex = data.reverse().find((item) => item.what == 'ミルク') %>
-                <% if (milkIndex) { %>
-                    <!-- Dummy Value Holder -->
-                    <div style="display: none;" class="latestTarget"><%= milkIndex.when %></div>
-                    <h6 class = "latestDisplay mb-0" id = "latestMilk">-分前</h6>
-                <% } else { %>
-                    <%= "まだデータがありません" %>
-                <% } %>
-            </span>
+                    <% if (milkIndex) { %>
+                        <!-- Dummy Value Holder -->
+                        <div style="display: none;" class="latestTarget"><%= milkIndex.when %></div>
+                        <h4 class = "latestDisplay" id = "latestMilk">-分前</h4>
+                    <% } else { %>
+                        <%= "まだデータがありません" %>
+                    <% } %>
+            </div>
+            <div class = "bottom-cards">
+                <input id = "milkPortion" type = "number" min = "0" value = "20" step="5" name = "portion">
+                <input type = "submit" class = "actionBtns green" name = "what" value = "ミルク" >
+            </div>
         </div>
-        <div class = "input-group mb-3  justify-content-center">
-            <input type= "submit" class = "btn btn-secondary btn-lg actionBtns" name = "what" value= "オムツ">
-            <span class="input-group-text" id="basic-addon2">
+        <div class="cards">
+            <div class ="top-cards">
+            <h4>ミルク</h4>
                 <% let diaperIndex = data.find((item) => item.what == 'オムツ') %>
                 <% if (diaperIndex) { %>
                 <!-- Dummy Value Holder -->
                 <div style="display: none;" class="latestTarget"><%= diaperIndex.when %></div>
-                <h6 class = "latestDisplay mb-0" id = "latestDiaper">-分前</h6>
+                <h4 class = "latestDisplay" id = "latestDiaper">-分前</h4>
                 <% } else { %>
                 <%= "まだデータがありません"　 %>
                 <% } %>
-            </span>
-        </div>
-        
-        <div>
-            <select class="form-select form-select-lg" id="form-select" name = "who">
-                <option value="Sho" name = "Sho">Sho</option>
-                <option value="Non" name = "Non">Non</option>
-            </select>
+            </div>
+            <div class="bottom-cards">
+                <input id = "milkPortion" type = "number" min = "0" value = "20" step="5" name = "portion">
+                <input type= "submit" class = "actionBtns purple" name = "what" value= "オムツ">
+            </div>
         </div>
     </form>
     <style>

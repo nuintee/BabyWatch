@@ -2,6 +2,7 @@
 body{
     margin:0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .header{
@@ -65,7 +66,7 @@ h4{
 }
 
 .bottom-cards{
-    padding-top: 4em;
+    padding-top: 1em;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -83,6 +84,7 @@ h4{
     font-size: 1em;
     font-weight: bold;
     filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.16));
+    -webkit-appearance: none;
 }
 
 .actionBtns.green{
@@ -100,4 +102,30 @@ h4{
     text-align: center;
     font-size: 13px;
     padding: 0.7em;
+}
+
+.card-input{
+    border: none;
+    border-radius: 0;
+    font-size: 45px ;
+    width: 70%;
+    background-color: none;
+    font-weight: bold;
+    text-align: center;
+    padding:0;
+    -webkit-appearance: none;
+}
+
+.card-input.green{
+    border-bottom: #86E3CE 2px solid;
+    caret-color: #86E3CE;
+}
+
+.card-input.purple{
+    border-bottom: #CCABDA 2px solid;
+    caret-color: #CCABDA;
+}
+
+.card-input:focus{
+    outline: none;
 }

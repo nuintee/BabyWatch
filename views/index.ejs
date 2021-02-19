@@ -76,13 +76,13 @@
                     <% } %>
             </div>
             <div class = "bottom-cards">
-                <input id = "milkPortion" type = "number" min = "0" value = "20" step="5" name = "portion">
+                <input id = "milkPortion" class="card-input green"  type = "number" min = "0"  step="5" value = "20" name = "portion" placeholder="ml">
                 <input type = "submit" class = "actionBtns green" name = "what" value = "ミルク" >
             </div>
         </div>
         <div class="cards">
             <div class ="top-cards">
-            <h4>ミルク</h4>
+            <h4>オムツ</h4>
                 <% let diaperIndex = data.find((item) => item.what == 'オムツ') %>
                 <% if (diaperIndex) { %>
                 <!-- Dummy Value Holder -->
@@ -93,7 +93,11 @@
                 <% } %>
             </div>
             <div class="bottom-cards">
-                <input id = "milkPortion" type = "number" min = "0" value = "20" step="5" name = "portion">
+                <!-- <input autofocus id = "diaperType" class="card-input" type = "number" min = "0" value = "20" step="5" name = "diaperType"> -->
+                <select class="card-input purple">
+                    <option value="poo">オシッコ</option>
+                    <option value="pee">ウンチ</option>
+                </select>
                 <input type= "submit" class = "actionBtns purple" name = "what" value= "オムツ">
             </div>
         </div>
@@ -185,13 +189,12 @@
         setInterval(timeUpdate,1000)
         // <--
 
-
+        //送信ボタン
         for (let i = 0; i < actionBtns.length; i++){
             actionBtns[i].addEventListener('click',function(e){
                 pressedBtn = e.target.value
             },false)
         }
-
 
         function drawer(){
             let drawerTarget = document.getElementsByClassName('drawer')[0];
@@ -207,6 +210,12 @@
             let who = whoTarget[whoIndex].value
 
             let portion = document.getElementById('milkPortion');
+            if (portion.value == ''){
+                portion.value = 0;
+            }
+            else {
+                console.log(portion.value)
+            }
             let question;
 
             if (pressedBtn == 'ミルク'){

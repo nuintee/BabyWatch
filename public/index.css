@@ -17,6 +17,7 @@ body{
 }
 
 .top-header{
+    align-items: center;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -30,6 +31,8 @@ h4{
 
 .title{
     font-size: large;
+    font-weight: bold;
+    color:#919191;
 }
 
 .nav-btn{
@@ -150,4 +153,13 @@ h4{
 
 #form-select:focus{
     outline: none;
+}
+
+.nav-btn{
+    border:none;
+    font-size: 22px;
+    padding:0.5em;
+    background-color: none;
+    -webkit-appearance: none;
+    color:#919191;
 }

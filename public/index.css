@@ -8,7 +8,7 @@ body{
 .header{
     top:0;
     left:0;
-    background: linear-gradient(to right bottom, #E3E0E0,#D6D6D6) ;
+    background: linear-gradient(to right bottom, #E3E0E0,#D9D9D9) ;
     height:calc(100vh / 3);
     width: 100%;
     border-radius: 0 0 50px 50px;
@@ -26,6 +26,10 @@ body{
 
 h4{
     margin:0;
+}
+
+.title{
+    font-size: large;
 }
 
 .nav-btn{
@@ -124,8 +128,26 @@ h4{
 .card-input.purple{
     border-bottom: #CCABDA 2px solid;
     caret-color: #CCABDA;
+    font-size: 40px;
 }
 
 .card-input:focus{
+    outline: none;
+}
+
+#form-select{
+    background-color: #FFF;
+    border: none;
+    border-radius: 20px;
+    color:#919191;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding:0.5em;
+    filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.1));
+    -webkit-appearance: none;
+}
+
+#form-select:focus{
     outline: none;
 }

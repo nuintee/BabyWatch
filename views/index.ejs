@@ -7,21 +7,23 @@
     <link rel="stylesheet" href="index.css">
     <link href="manifest.json" crossorigin= "use-credentials" rel="manifest" >
     <script async src="https://cdn.jsdelivr.net/npm/pwacompat" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 </head>
 <body>
     <div class = "drawer">
-        <header>
-            <button onclick="drawer()" class="btn btn-outline-dark">ホーム</button>
+        <header class="header">
+            <div class="top-header">
+                <button onclick="drawer()" class="nav-btn"><i class="fas fa-bars"></i></button>
+                <h4 class = "title">アナリティクス</h4>
+            </div>
         </header>
-        <hr>
-        <table>
+        <!-- <table>
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">誰が</th>
-                    <th scope="col">いつ</th>
-                    <th scope="col">何をした</th>
-                    <th scope="col">どのくらい？(任意)</th>
+                    <th scope="col">行動</th>
+                    <th scope="col">詳細</th>
+                    <th scope="col">時間</th>
+                    <th scope="col">最新</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,18 +49,18 @@
                 </tr>
                 <%} %> 
             </tbody>
-        </table>
+        </table> -->
     </div>
     <header class = "header">
         <div class = "top-header">
-            <button onclick="drawer()" class="nav-btn"> データ </button>
-            <h4>ホーム</h4>
-            <div>
+            <button onclick="drawer()" class="nav-btn"><i class="fas fa-bars"></i></button>
+            <h4 class = "title">ホーム</h4>
+            <span class = "select-wrapper">
                 <select id="form-select" name = "who">
                     <option value="Sho" name = "Sho">Sho</option>
                     <option value="Non" name = "Non">Non</option>
                 </select>
-            </div>
+            </span>
             <!-- <button onclick="location.reload()" class="nav-btn"> 更新 </button> -->
         </div>
     </header>
@@ -103,7 +105,6 @@
         </div>
     </form>
     <style>
-
         .drawer {
             position: absolute;
             top:0;
@@ -129,6 +130,30 @@
         const latestDisp = document.getElementsByClassName('latestDisplay');
         let pressedBtn;
         let whoisTarget
+        //初期Y座標取得
+        let startY;
+        const body = document.body;
+        
+        //Pull To Refresh -->
+
+        if (!window.TouchEvent){
+            alert('no')
+        }
+
+        //タッチ開始
+        body.addEventListener('touchstart',e => {
+            startY = e.touches[0].pageY;
+        },{passive : true})
+
+        body.addEventListener('touchend',e => {
+            const y = e.changedTouches[0].pageY
+            if (document.scrollingElement.scrollTop <= 0 && y > startY &&
+            !document.body.classList.contains('refreshing')){
+                location.reload();
+            }
+        })
+
+        //<--
 
         //socket io
         let socket = io()

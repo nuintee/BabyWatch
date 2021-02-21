@@ -74,34 +74,59 @@ summary {
     outline: none;
 }
 
-summary::after{
+.summary-wrapper::after{
     font-family: "Font Awesome 5 Free";
     content: "\f077";
     font-weight: bold;
     color:#86E3CE;
 }
 
-summary.green::after{
+.summary-wrapper.green::after{
     color:#86E3CE;
 }
 
-summary.purple::after{
+.summary-wrapper.purple::after{
     color:#CCABDA;
 }
 
 
-.cards.table[open] summary::after{
+.cards.table[open] .summary-wrapper::after{
     transform: rotate(180deg);
 }
 
+.cards.table summary:focus{
+    outline: none;
+    box-shadow: none;
+    background-color: none;
+    border: none;
+    -webkit-appearance: none;
+}
+
+
 summary::-webkit-details-marker {
     display: none;
+}
+
+.summary-wrapper{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+summary{
+    -webkit-tap-highlight-color: transparent;
+    border-style: none;
+    outline: none;
+    box-shadow: none;
 }
 
 .cards-scroller{
     padding:0 2em;
     height: 80%;
     overflow-y:auto;
+    z-index: 100;
 }
 
 
@@ -139,6 +164,10 @@ summary::-webkit-details-marker {
 
 .actionBtns.green{
     background-color: #86E3CE;
+}
+
+.actionBtns.red{
+    background-color: #FC887B;
 }
 
 .actionBtns.purple{

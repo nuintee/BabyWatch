@@ -37,19 +37,41 @@
                     <% let hour = formated[2] %>
                     <% let minutes = formated[3] %>
                     <% const time = `${month}/${date} ${hour}:${minutes}` %>
-                    <details class = "cards table">
-                            <% if (data[i].what == 'ミルク') { %>
-                                <summary class = "top-cards green">
-                                <h4 class="table-lead green"><%= data[i].what %></h4>
-                                <h4><%= data[i].portion %><small>ml</small></h4>
-                            <% } else {%>
-                                <summary class = "top-cards purple">
-                                <h4 class="table-lead purple"><%= data[i].what %></h4>
-                            <% } %>
-                            <h4><%= time %></h4>
-                        </summary>
-                        <h5>Expanded!</h5>
-                    </details>
+                        <details class="cards table">
+                               <summary class="purple">
+                                    <% if (data[i].what == "ミルク") { %>
+                                        <div class="summary-wrapper"><span class="table-lead green"><%= data[i].what %></span><span class="table-detail"><%= data[i].portion %></span><span class="table-date"><%= time %></span></div>
+                                    <% } else { %>
+                                        <div class="summary-wrapper purple"><span class="table-lead purple"><%= data[i].what %></span><span class="table-detail"><%= data[i].portion %></span><span class="table-date"><%= time %></span></div>
+                                    <% } %>
+                                </summary>
+                                <form action="api/upd" method="POST" class = "update-form">
+                                    <hr>
+                                    <label>
+                                        量:
+                                        <input type="number" name=""  placeholder="<%= time %>">
+                                    </label> 
+                                    <hr>
+                                    <label>
+                                        担当者:
+                                    </label> 
+                                    <hr>
+                                    <label>
+                                        時間:
+                                        <input type="text" name=""  placeholder="MM/DD HH:mm">
+                                    </label> 
+                                    <hr>
+                                    <h5><%= data[i].who %></h5>
+                                    <div class="top-cards">
+                                        <% if (data[i].what == 'ミルク') { %>
+                                            <input type = "submit"  value="更新" name = "update-submit" class="actionBtns green">
+                                        <% } else { %>
+                                            <input type = "submit"  value="更新" name = "update-submit" class="actionBtns purple">
+                                        <% } %>
+                                            <input type = "submit"  value="削除" name = "delete-submit" class="actionBtns red">
+                                    </div>
+                                </form>
+                        </details>
                 <% } %>
         </div>
 
@@ -64,26 +86,26 @@
             </thead>
             <tbody>
                 <%# 最新のものから表示 %>
-                <%for (let i = data.length - 1; i >= 0; i--)  {%>
+                <%#for (let i = data.length - 1; i >= 0; i--)  {%>
                 <%# Formatting Time %>
-                <% let formated = data[i].when.match(/((?<=-)\d.|(?<=[a-zA-Z])\d.|(?<=:)\d.{1})/gi) %>
-                <% let month = formated[0] %>
-                <% let date = formated[1] %>
-                <% let hour = formated[2] %>
-                <% let minutes = formated[3] %>
-                <% const time = `${month}/${date} ${hour}:${minutes}` %>
+                <%# let formated = data[i].when.match(/((?<=-)\d.|(?<=[a-zA-Z])\d.|(?<=:)\d.{1})/gi) %>
+                <%# let month = formated[0] %>
+                <%# let date = formated[1] %>
+                <%# let hour = formated[2] %>
+                <%# let minutes = formated[3] %>
+                <%# const time = `${month}/${date} ${hour}:${minutes}` %>
                 <tr>
-                    <th scope="row"><%= i + 1 %></th>
-                    <td><%= data[i].who%></td>
-                    <td><%= time %></td>
-                    <td><%= data[i].what%></td>
+                    <th scope="row"><%#= i + 1 %></th>
+                    <td><%#= data[i].who%></td>
+                    <td><%#= time %></td>
+                    <td><%#= data[i].what%></td>
                     <td>
-                        <% if (data[i].what == 'ミルク') { %>
-                        <%=     data[i].portion%><small>ml</small>
-                        <% };%>
+                        <%# if (data[i].what == 'ミルク') { %>
+                        <%#=     data[i].portion%><small>ml</small>
+                        <%# };%>
                     </td>
                 </tr>
-                <%} %> 
+                <%#} %> 
             </tbody>
         </table> -->
     </div>

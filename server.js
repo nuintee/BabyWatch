@@ -46,6 +46,11 @@ app.all('/', function(req,res){
         })
 })
 
+app.post('/api/upd',function(req,res){
+    console.log(req.body.updated-submit)
+    res.redirect('/')
+})
+
 
 app.post('/api',function(req,res){
     //Date

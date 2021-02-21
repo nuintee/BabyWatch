@@ -15,8 +15,44 @@
             <div class="top-header">
                 <button onclick="drawer()" class="nav-btn"><i class="fas fa-arrow-left"></i></button>
                 <h4 class = "title">アナリティクス</h4>
+                <button class="nav-btn"><i class="fas fa-cog"></i></button>
             </div>
         </header>
+        <section class="main-section">
+            <div class ="cards table">
+                <div class = "top-cards">
+                    <h4>行動</h4>
+                    <h4>詳細</h4>
+                    <h4>時間</h4>
+                    <h4>最新</h4>
+                </div>
+            </div>
+        </section>
+        <div class = "cards-scroller">
+                <%for (let i = data.length - 1; i >= 0; i--)  {%>
+                    <%# Formatting Time %>
+                    <% let formated = data[i].when.match(/((?<=-)\d.|(?<=[a-zA-Z])\d.|(?<=:)\d.{1})/gi) %>
+                    <% let month = formated[0] %>
+                    <% let date = formated[1] %>
+                    <% let hour = formated[2] %>
+                    <% let minutes = formated[3] %>
+                    <% const time = `${month}/${date} ${hour}:${minutes}` %>
+                    <details class = "cards table">
+                            <% if (data[i].what == 'ミルク') { %>
+                                <summary class = "top-cards green">
+                                <h4 class="table-lead green"><%= data[i].what %></h4>
+                                <h4><%= data[i].portion %><small>ml</small></h4>
+                            <% } else {%>
+                                <summary class = "top-cards purple">
+                                <h4 class="table-lead purple"><%= data[i].what %></h4>
+                            <% } %>
+                            <h4><%= time %></h4>
+                        </summary>
+                        <h5>Expanded!</h5>
+                    </details>
+                <% } %>
+        </div>
+
         <!-- <table>
             <thead>
                 <tr>
@@ -64,7 +100,7 @@
             <!-- <button onclick="location.reload()" class="nav-btn"> 更新 </button> -->
         </div>
     </header>
-    <form action = "/api" method = "POST"  id = "main-form"  onsubmit="return check(this)">
+    <form action = "/api" method = "POST"  class = "main-section"  onsubmit="return check(this)">
         <div class ="cards">
             <div class = "top-cards">
                 <h4>ミルク</h4>
@@ -96,9 +132,9 @@
             </div>
             <div class="bottom-cards">
                 <!-- <input autofocus id = "diaperType" class="card-input" type = "number" min = "0" value = "20" step="5" name = "diaperType"> -->
-                <select class="card-input purple">
-                    <option value="poo">オシッコ</option>
-                    <option value="pee">ウンチ</option>
+                <select class="card-input purple" id = "select_input1">
+                    <option value="poo">うんち</option>
+                    <option value="pee">おしっこ</option>
                 </select>
                 <input type= "submit" class = "actionBtns purple" name = "what" value= "オムツ">
             </div>
@@ -133,12 +169,12 @@
         //初期Y座標取得
         let startY;
         const body = document.body;
+
+        //Push Notification -->
+
+        //<--
         
         //Pull To Refresh -->
-
-        if (!window.TouchEvent){
-            alert('no')
-        }
 
         //タッチ開始
         body.addEventListener('touchstart',e => {
@@ -147,8 +183,10 @@
 
         body.addEventListener('touchend',e => {
             const y = e.changedTouches[0].pageY
+            console.log(e.target.classList)
             if (document.scrollingElement.scrollTop <= 0 && y > startY &&
-            !document.body.classList.contains('refreshing')){
+            !document.body.classList.contains('refreshing') &&
+            e.target.classList.contains('top-header')){
                 location.reload();
             }
         })

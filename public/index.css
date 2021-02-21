@@ -68,6 +68,11 @@ h4{
 .cards.table{
     height:auto;
     padding: 1em;
+    font-weight: bold;
+}
+
+hr{
+    border: 1px solid #E3E0E0;
 }
 
 summary {
@@ -113,6 +118,7 @@ summary::-webkit-details-marker {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    color:#919191;
 }
 
 summary{
